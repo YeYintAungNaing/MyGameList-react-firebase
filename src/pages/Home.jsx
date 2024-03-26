@@ -3,7 +3,7 @@ import { GlobalContext } from '../context/GlobalState';
 
 export default function Home() {
 
-    const {searchResult, setSearchResult} = useContext(GlobalContext);
+    const {searchResult, setSearchResult, myGameList, setMyGameList, filteredList, setFilteredList} = useContext(GlobalContext);
     const [serachKey, setSearchKey] = useState('');
 
 
@@ -12,20 +12,45 @@ export default function Home() {
 
         try {
             const response = await fetch(url);
-            const data = await response.json();
+            const data =  await response.json();
             console.log(data);
-            setSearchResult(data)
-           
-          } catch (error) {
-            console.error('Error fetching platforms:', error);
-          }
+            const game = {
+                name : data.name,
+                slug : data.slug,
+                id : data.id,
+                description : data.description,
+                released : data.released,
+                rating : data.rating,
+                website : data.website,
+                background_image : data.background_image,
+                background_image_additional : data.background_image_additional,
+                myStatus : "pending"
+            }
+            setSearchResult(game)   
         }
 
+        catch (error) {
+        console.error('Error fetching platforms:', error);
+        }
+    }
 
-    function handleSearch(event){
+
+    function handleSearch(event) {          // when the user search the game
         event.preventDefault()
         //console.log(serachKey)
-        fetchGames()    
+        if (serachKey !== ""){
+        fetchGames() 
+        } 
+        else{
+            window.alert("Search bar is empty")
+        }  
+    }
+
+    function addToList() {             // when the user click add to list button
+        if (searchResult){
+            setMyGameList([...myGameList, searchResult])
+            console.log('added')
+        }
     }
     
 
@@ -47,6 +72,7 @@ export default function Home() {
                         className='resultImg'
                         src={searchResult.background_image} 
                         alt={searchResult.background_image_additional}></img>
+                        <button onClick={addToList}>Add to MyGameList</button>
                     </div>
                 )
                 :null
