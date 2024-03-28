@@ -5,6 +5,7 @@ import Home from './pages/Home'
 import MyGameList from './pages/MyGameList'
 import Profile from './pages/Profile'
 import PlanToPlay from './pages/PlanToPlay'
+import GameDetail from './pages/GameDetail'
 import "./style.css"
 
 
@@ -17,6 +18,7 @@ function App() {
         <Route path='/myGameList' element={<MyGameList></MyGameList>}></Route>
         <Route path='/profile' element={<Profile></Profile>}></Route>
         <Route path='/planToPlay' element={<PlanToPlay></PlanToPlay>}></Route>
+        <Route path="/:id" element={<GameDetail/>}/>
       </Routes>
     </>
   )

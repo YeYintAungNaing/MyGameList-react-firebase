@@ -8,7 +8,7 @@ export default function GlobalState({children}) {
     const [searchResult, setSearchResult] = useState(null);   // user search result
     const [myGameList, setMyGameList] = useState([])          // user myGameList
     const [filteredList, setFilteredList] = useState([])      // list of games filterd by some sort of parameter( rating, pupularity ...)
-    
+        
     
     return (
         <GlobalContext.Provider
@@ -18,7 +18,7 @@ export default function GlobalState({children}) {
               myGameList, 
               setMyGameList, 
               filteredList, 
-              setFilteredList
+              setFilteredList, 
           }}>
               {children}
         </GlobalContext.Provider>
