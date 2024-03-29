@@ -2,6 +2,8 @@ import React, { useContext, useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { GlobalContext } from '../context/GlobalState';
 import { apiKey } from '../api/API';
+import CircleScore from '../component/CircleScore';
+
 
 export default function GameDetail() {
 
@@ -48,11 +50,10 @@ export default function GameDetail() {
                     </img>
                     <h3>{gameDetail.released}</h3>
                     <p>{gameDetail.description_raw}</p>
-
+                    <CircleScore score={gameDetail.metacritic}></CircleScore>
                 </div>
               )
-                : <h2>Loading.....Pls wait</h2>
-                
+                : <h2>Loading.....Pls wait</h2> 
             }
         </div>
     )
